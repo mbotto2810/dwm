@@ -10,15 +10,15 @@ static const unsigned int gappov    = 0;        /* vert outer gap between window
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "sans-serif:size=10", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
-static char dmenufont[]             = "sans-serif:size=10";
-static char normbgcolor[]           = "#32302f";//
-static char normbordercolor[]       = "#3c3836";//
-static char normfgcolor[]           = "#83a698";
-static char selfgcolor[]            = "#d79921";//
-static char selbordercolor[]        = "#83a698";//
-static char selbgcolor[]            = "#32302f";//
+static const int topbar             = 0;        /* 0 means bottom bar */
+static const char *fonts[]          = { "GohuFont Nerd Font Mono:size=8", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
+static char dmenufont[]             = "GohuFont Nerd Font Mono:size=8";
+static char normbgcolor[]           = "#222222";  // "#32302f"
+static char normbordercolor[]       = "#444444";  // "#3c3836"; // color pixel border inactive
+static char normfgcolor[]           = "#999999";  // "#83a698"; //
+static char selfgcolor[]            = "#ffffff";  // "#d79921"; //
+static char selbordercolor[]        = "#005577";  // "#ffffff"; // color pixel of border active
+static char selbgcolor[]            = "#000000";  // "#32302f"; //
 
 static char *colors[][3] = {
        /*               fg           bg           border   */
@@ -39,7 +39,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ" };
+static const char *tags[] = { "web", "terminal", "pdf", "a", "b", "c", "d", "e", "f" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -48,7 +48,11 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   isterminal noswallow monitor */
 	{ "Gimp",     NULL,       NULL,       1 << 8,       0,           0,         0,        -1 },
-	{ "St",       NULL,       NULL,       0,            0,           1,         0,        -1 },
+	{ "Chromium", NULL,       NULL,       1<<0,            0,           0,         0,        -1 },
+	{ "firefox",  NULL,       NULL,       1<<0,            0,           0,         0,        -1 },
+	{ "St",       NULL,       NULL,       1<<1,            0,           1,         0,        -1 },
+	{ "Alacritty",       NULL,       NULL,      1<<1,            0,           1,         0,        -1 },
+	{ "Zathura",  NULL,       NULL,       1<<2,            0,           0,         0,        -1 },
 	{ NULL,       NULL,       "Event Tester", 0,        0,           0,         1,        -1 },
 	{ NULL,      "spterm",    NULL,       SPTAG(0),     1,           1,         0,        -1 },
 	{ NULL,      "spcalc",      NULL,       SPTAG(1),     1,           1,         0,        -1 },
@@ -176,6 +180,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
 	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
+	{ MODKEY,			XK_F1,		spawn,		SHCMD("alacritty") },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
@@ -207,8 +212,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("notify-send \"📋 Clipboard contents:\" \"$(xclip -o -selection clipboard)\"") },
 
-	{ MODKEY,			XK_F1,		spawn,		SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") },
-	{ MODKEY,			XK_F2,		spawn,		SHCMD("tutorialvids") },
+	{ MODKEY,			XK_F2,		spawn,		SHCMD("nonet") },
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD("st -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },

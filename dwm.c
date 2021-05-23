@@ -529,7 +529,7 @@ unswallow(Client *c)
 void
 buttonpress(XEvent *e)
 {
-	unsigned int i, x, click, occ = 0;
+	unsigned int i, x, click, occ = 1;
 	Arg arg = {0};
 	Client *c;
 	Monitor *m;
@@ -548,8 +548,8 @@ buttonpress(XEvent *e)
 			occ |= c->tags == 255 ? 0 : c->tags;
 		do {
 			/* do not reserve space for vacant tags */
-			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-				continue;
+			//if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i)) //linha modificada
+			//	continue; //linha modificada
 			x += TEXTW(tags[i]);
 		} while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
@@ -864,15 +864,16 @@ drawbar(Monitor *m)
 	}
 
 	for (c = m->clients; c; c = c->next) {
-		occ |= c->tags == 255 ? 0 : c->tags;
+		//occ |= c->tags == 255 ? 0 : c->tags; //linha modificada
+		occ |= c->tags; //linha modificada
 		if (c->isurgent)
 			urg |= c->tags;
 	}
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
-		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-		continue;
+		//if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i)) //linha modificada
+		//continue; //linha modificada
 
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
