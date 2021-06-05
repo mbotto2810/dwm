@@ -13,12 +13,12 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "GohuFont Nerd Font Mono:size=8", "JoyPixels:pixelsize=10:antialias=true:autohint=true"  };
 static char dmenufont[]             = "GohuFont Nerd Font Mono:size=8";
-static char normbgcolor[]           = "#222222";  // "#32302f"
-static char normbordercolor[]       = "#444444";  // "#3c3836"; // color pixel border inactive
-static char normfgcolor[]           = "#999999";  // "#83a698"; //
-static char selfgcolor[]            = "#ffffff";  // "#d79921"; //
-static char selbordercolor[]        = "#005577";  // "#ffffff"; // color pixel of border active
-static char selbgcolor[]            = "#000000";  // "#32302f"; //
+static char normbgcolor[]           = /*"#222222";*/   "#000000"; // 32302f
+static char normbordercolor[]       = /*"#444444";*/   "#3c3836"; // color pixel border inactive
+static char normfgcolor[]           = /*"#cccccc";*/   "#cccccc"; //
+static char selfgcolor[]            = /*"#ffffff";*/   "#d79921"; //
+static char selbordercolor[]        = /*"#005577";*/   "#ffffff"; // color pixel of border active
+static char selbgcolor[]            = /*"#005577";*/   "#000000"; // 32302f
 
 static char *colors[][3] = {
        /*               fg           bg           border   */
